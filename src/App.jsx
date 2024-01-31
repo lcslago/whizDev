@@ -13,11 +13,12 @@ const Background = styled.div`
   background-repeat: no-repeat;
   background-size: 100vw;
   min-height: 100vh;
-  padding: 0 8rem;
+  padding: 0 10rem;
 `
 
 const Main = styled.main`
   display: flex;
+  gap: 3rem;
 `
 
 const App = () => {

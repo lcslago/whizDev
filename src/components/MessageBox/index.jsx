@@ -3,7 +3,7 @@ import styled from "styled-components"
 const MessageBoxContainer = styled.section`
     width: 50%;
     height: auto;
-    margin: 0 4rem;
+    margin: 0;
 `
 
 const WelcomeMessage = styled.div`
