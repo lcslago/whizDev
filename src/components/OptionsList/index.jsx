@@ -12,22 +12,28 @@ const OptionsListContainer = styled.section`
 `
 
 const Option = styled.li`
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
     list-style: none;
-    background-color: #3C4D67;
-    font-weight: 500;
-    font-size: 1.5rem;
-    border-radius: 1.2rem;
-    padding: 1rem;
-    margin: 1.2rem 0;
 
     img {
         width: 35px;
         padding: .5rem;
-        background-color: white; //MUDAR PARAR RESPECTIVAS CORES DOS ICONES
         border-radius: .5rem;
+    }
+
+    button {
+        width: 100%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        background-color: #3C4D67;
+        font-weight: 500;
+        font-size: 1.5rem;
+        border: none;
+        color: white;
+        border-radius: 1.2rem;
+        padding: 1rem;
+        margin: 1.2rem 0;
     }
 `
 
@@ -41,7 +47,15 @@ const OptionsList = () => {
             <ul>
                 {!loading && data
                     .map(category =>
-                        <Option><img src={category.icon} id="icon" /> {category.title} </Option>)}
+                        <Option>
+                            <button>
+                                <img
+                                    src={category.icon}
+                                    style={{ backgroundColor: category['icon-bg-color'] }} />
+
+                                {category.title}
+                            </button>
+                        </Option>)}
             </ul>
         </OptionsListContainer>
 
