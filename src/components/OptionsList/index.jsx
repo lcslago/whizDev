@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import styled from "styled-components"
 import { ApiContext } from "../../context/ApiContext"
+import BarLoader from "react-spinners/BarLoader"
 
 const OptionsListContainer = styled.section`
     width: 50%;
@@ -22,6 +23,7 @@ const Option = styled.li`
 
     button {
         width: 100%;
+        height: 90px;
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -37,25 +39,39 @@ const Option = styled.li`
     }
 `
 
-//CRIAR UMA ANIMAÇÃO DE LOADING ATÉ A RENDERIZAÇÃO DA LISTA DE CATEGORIAS
+const OptionContainer = ({ children }) =>
+    <Option>
+        <button>
+            {children}
+        </button>
+    </Option>
 
 const OptionsList = () => {
     const { data, loading } = useContext(ApiContext);
+    const OptionsPerPage = 4;
 
     return (
         <OptionsListContainer>
             <ul>
-                {!loading && data
-                    .map(category =>
-                        <Option>
-                            <button>
-                                <img
-                                    src={category.icon}
-                                    style={{ backgroundColor: category['icon-bg-color'] }} />
+                {loading &&
+                    Array.from({ length: OptionsPerPage }).map((_, index) =>
+                        <OptionContainer key={index}>
+                            <BarLoader
+                                color="#adc1d6"
+                                width={450}
+                                height={8}
+                            />
+                        </OptionContainer>)}
 
-                                {category.title}
-                            </button>
-                        </Option>)}
+                {!loading &&
+                    data.map(category =>
+                        <OptionContainer key={category.id}>
+                            <img
+                                src={category.icon}
+                                style={{ backgroundColor: category['icon-bg-color'] }} />
+
+                            {category.title}
+                        </OptionContainer>)}
             </ul>
         </OptionsListContainer>
 
