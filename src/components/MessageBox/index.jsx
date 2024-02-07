@@ -6,7 +6,7 @@ const MessageBoxContainer = styled.section`
     margin: 0;
 `
 
-const WelcomeMessage = styled.div`
+const WelcomeMessageContainer = styled.div`
     user-select: none;
     font-size: 2rem;
     h1{
@@ -28,16 +28,19 @@ const Question = styled.div`
 
 `
 
-const MessageBox = (props) =>
+export const MessageBox = ({ children }) =>
     <MessageBoxContainer>
-        {props.content === "WelcomeMessage" ?
-            <WelcomeMessage>
-                <h1 role="heading" aria-level="1">
-                    Boas-vindas ao <span role="img" aria-label="whizDev">&lt;whizDev/&gt;</span>
-                </h1>
-
-                <p>Para começar escolha uma categoria</p>
-            </WelcomeMessage> : ""}
+        <WelcomeMessageContainer>
+            {children}
+        </WelcomeMessageContainer>
     </MessageBoxContainer>
 
-export default MessageBox
+
+export const WelcomeMessage = () =>
+    <div>
+        <h1 role="heading" aria-level="1">
+            Boas-vindas ao <span role="img" aria-label="whizDev">&lt;whizDev/&gt;</span>
+        </h1>
+
+        <p>Para começar escolha uma categoria</p>
+    </div>

@@ -2,12 +2,16 @@ import { useContext } from "react"
 import styled from "styled-components"
 import { ApiContext } from "../../context/ApiContext"
 import BarLoader from "react-spinners/BarLoader"
+import { Link } from "react-router-dom"
 
 const OptionsListContainer = styled.section`
     width: 50%;
     height: auto;
 
     ul {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
         padding: 0;
     }
 `
@@ -27,16 +31,19 @@ const Option = styled.li`
         cursor: pointer;
         display: flex;
         align-items: center;
-        gap: 1.5rem;
         background-color: #3C4D67;
         font-weight: 500;
         font-size: 1.5rem;
         border: none;
-        color: white;
         border-radius: 1.2rem;
         padding: 1rem;
-        margin: 1.2rem 0;
+        gap: 1.5rem;
+        color: white;
     }
+`
+
+const StyledLink = styled(Link)`
+        text-decoration: none;
 `
 
 const OptionContainer = ({ children }) =>
@@ -46,36 +53,36 @@ const OptionContainer = ({ children }) =>
         </button>
     </Option>
 
-const OptionsList = () => {
-    const { data, loading } = useContext(ApiContext);
-    const OptionsPerPage = 4;
+export const OptionsList = ({ children }) =>
+    <OptionsListContainer>
+        {children}
+    </OptionsListContainer>
+
+export const CategoryList = () => {
+    const { data, loading } = useContext(ApiContext)
+    const OptionsPerPage = 4
 
     return (
-        <OptionsListContainer>
-            <ul>
-                {loading &&
-                    Array.from({ length: OptionsPerPage }).map((_, index) =>
-                        <OptionContainer key={index}>
-                            <BarLoader
-                                color="#adc1d6"
-                                width={450}
-                                height={8}
-                            />
-                        </OptionContainer>)}
+        <ul>
+            {loading &&
+                Array.from({ length: OptionsPerPage }).map((_, index) =>
+                    <OptionContainer key={index}>
+                        <BarLoader
+                            color="#adc1d6"
+                            width={450}
+                            height={6} />
+                    </OptionContainer>)}
 
-                {!loading &&
-                    data.map(category =>
-                        <OptionContainer key={category.id}>
+            {!loading &&
+                data.map(category =>
+                    <StyledLink to={`/${category.title.toLowerCase()}`} key={category.id}>
+                        <OptionContainer>
                             <img
                                 src={category.icon}
                                 style={{ backgroundColor: category['icon-bg-color'] }} />
 
                             {category.title}
-                        </OptionContainer>)}
-            </ul>
-        </OptionsListContainer>
-
-    )
+                        </OptionContainer>
+                    </StyledLink>)}
+        </ul>)
 }
-
-export default OptionsList

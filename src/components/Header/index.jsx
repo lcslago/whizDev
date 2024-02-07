@@ -6,7 +6,7 @@ const StyledHeader = styled.header`
     justify-content: space-between;
     padding: 2rem;
     width: auto;
-    height: 20%;
+    height: 10vh;
 `
 
 const HeaderContainer = styled.div`
@@ -16,16 +16,18 @@ const HeaderContainer = styled.div`
     gap: .5rem;
 `
 
-const Header = () =>
+export const Header = ({ children }) =>
     <StyledHeader>
+        {children}
+    </StyledHeader>
+
+export const HeaderContent = () =>
+    <>
         <HeaderContainer>
             imagem
             <h1>title</h1>
         </HeaderContainer>
-
         <HeaderContainer>
             theme selector
         </HeaderContainer>
-    </StyledHeader>
-
-export default Header
+    </>

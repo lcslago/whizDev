@@ -1,9 +1,8 @@
 import styled from "styled-components"
 import GlobalStyle from "./components/GlobalStyles"
-import Header from "./components/Header"
-import MessageBox from "./components/MessageBox"
-import OptionsList from "./components/OptionsList"
+import { BrowserRouter } from "react-router-dom"
 import { DatabaseProvider } from "./context/ApiContext"
+import { AppRoutes } from "./Routes"
 
 const Background = styled.div`
   background-color: #313E51;
@@ -16,23 +15,16 @@ const Background = styled.div`
   padding: 0 10rem;
 `
 
-const Main = styled.main`
-  display: flex;
-  gap: 3rem;
-`
-
 const App = () => {
   return (
-    <Background>
-      <GlobalStyle />
-      <Header></Header>
-      <Main>
+    <BrowserRouter>
+      <Background>
+        <GlobalStyle />
         <DatabaseProvider>
-          <MessageBox content="WelcomeMessage"></MessageBox>
-          <OptionsList></OptionsList>
+          <AppRoutes />
         </DatabaseProvider>
-      </Main>
-    </Background >
+      </Background >
+    </BrowserRouter >
   )
 }
 
