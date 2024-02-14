@@ -4,7 +4,7 @@ import { OptionContainer, OptionsList } from "../../components/OptionsList";
 import { ApiContext } from "../../context/ApiContext";
 import { useContext } from "react";
 import { Header, HeaderTitle } from "../../components/Header";
-import { AppContainer, Main } from "../../App";
+import { Main } from "../../App";
 import { BarLoader } from "react-spinners";
 import styled from "styled-components";
 
@@ -49,8 +49,8 @@ const CategoryList = () => {
                 Array.from({ length: OptionsPerPage }).map((_, index) =>
                     <OptionContainer key={index}>
                         <BarLoader
-                            color="#adc1d6"
-                            width={450}
+                            color="#f5f6fa"
+                            width={"100%"}
                             height={6} />
                     </OptionContainer>)}
 
@@ -79,14 +79,12 @@ export const Homepage = () =>
         </Header>
 
         <Main>
-            <AppContainer>
-                <MessageBox>
-                    <WelcomeMessage />
-                </MessageBox>
+            <MessageBox>
+                <WelcomeMessage />
+            </MessageBox>
 
-                <OptionsList>
-                    <CategoryList />
-                </OptionsList>
-            </AppContainer>
+            <OptionsList>
+                <CategoryList />
+            </OptionsList>
         </Main>
     </>

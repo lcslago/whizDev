@@ -19,7 +19,7 @@ export const AppRoutes = () => {
             {!loading && data.map(category =>
                 <Route
                     path={`/${category.title.toLowerCase()}`}
-                    element={<Quiz />}
+                    element={<Quiz render={category} />}
                     key={category.id} />)}
         </Routes>)
 }

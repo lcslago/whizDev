@@ -39,8 +39,8 @@ const Option = styled.li`
             display: flex;
             align-items: center;
             color: white;
-            gap: 1rem;
-            padding: .5rem;
+            gap: 1.5rem;
+
         }
     }   
 `
