@@ -4,6 +4,15 @@ import { BrowserRouter } from "react-router-dom"
 import { DatabaseProvider } from "./context/ApiContext"
 import { AppRoutes } from "./Routes"
 
+export const Main = styled.main`
+  display: flex;
+  gap: 3rem;
+`
+export const AppContainer = styled.div`
+    display: flex;
+    gap: 5rem;
+`
+
 const Background = styled.div`
   background-color: #313E51;
   font-family: 'Rubik', sans-serif;

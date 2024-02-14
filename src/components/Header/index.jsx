@@ -19,15 +19,15 @@ const HeaderContainer = styled.div`
 export const Header = ({ children }) =>
     <StyledHeader>
         {children}
+        <ThemeSelector />
     </StyledHeader>
 
-export const HeaderContent = () =>
-    <>
-        <HeaderContainer>
-            imagem
-            <h1>title</h1>
-        </HeaderContainer>
-        <HeaderContainer>
-            theme selector
-        </HeaderContainer>
-    </>
+export const HeaderTitle = ({ children }) =>
+    <HeaderContainer>
+        {children}
+    </HeaderContainer>
+
+export const ThemeSelector = () =>
+    <HeaderContainer>
+        theme selector
+    </HeaderContainer>
