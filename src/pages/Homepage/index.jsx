@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { MessageBox } from "../../components/MessageBox";
-import { OptionContainer, OptionsList } from "../../components/OptionsList";
+import { LanguageIcon, OptionContainer, OptionsList } from "../../components/OptionsList";
 import { ApiContext } from "../../context/ApiContext";
 import { useContext } from "react";
 import { Header, HeaderTitle } from "../../components/Header";
@@ -59,7 +59,7 @@ const CategoryList = () => {
                     <OptionContainer key={category.id}>
                         <Link to={`/${category.title.toLowerCase()}`}>
 
-                            <img
+                            <LanguageIcon
                                 src={category.icon}
                                 style={{ backgroundColor: category['icon-bg-color'] }} />
 

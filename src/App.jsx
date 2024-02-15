@@ -7,7 +7,7 @@ import { AppRoutes } from "./Routes"
 export const Main = styled.main`
   display: flex;
   justify-content: space-between;
-  gap: 3rem;
+  gap: 5rem;
 `
 
 const Background = styled.div`

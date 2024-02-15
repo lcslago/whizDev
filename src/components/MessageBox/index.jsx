@@ -6,10 +6,6 @@ const MessageBoxContainer = styled.section`
     margin: 0;
 `
 
-const Question = styled.div`
-
-`
-
 export const MessageBox = ({ children }) =>
     <MessageBoxContainer>
         {children}

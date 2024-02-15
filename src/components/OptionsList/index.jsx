@@ -9,14 +9,16 @@ const OptionsListContainer = styled.section`
         flex-direction: column;
         gap: 1rem;
         padding: 0;
+        margin: 0;
     }
 `
 
 const Option = styled.li`
     list-style: none;  
+    user-select: none;
 
     button {
-        width: 100%;
+        width: 500px;
         height: 90px;
         cursor: pointer;
         display: flex;
@@ -28,12 +30,6 @@ const Option = styled.li`
         border-radius: 1.2rem;
         padding: 1rem;
 
-        img {
-            width: 35px;
-            padding: .5rem;
-            border-radius: .5rem;
-        }
-
         a {
             text-decoration: none;
             display: flex;
@@ -43,6 +39,12 @@ const Option = styled.li`
 
         }
     }   
+`
+
+export const LanguageIcon = styled.img`
+    width: 35px;
+    padding: .5rem;
+    border-radius: .5rem;
 `
 
 export const OptionsList = ({ children }) =>

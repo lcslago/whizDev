@@ -3,18 +3,13 @@ import { Header, HeaderTitle } from "../../components/Header"
 import styled from "styled-components"
 import { Main } from "../../App"
 import { MessageBox } from "../../components/MessageBox"
-import { OptionContainer, OptionsList } from "../../components/OptionsList"
+import { LanguageIcon, OptionContainer, OptionsList } from "../../components/OptionsList"
 
 const CategoryContainer = styled.div`
     display: flex;
     align-items: center;
+    user-select: none;
     gap: 1.5rem;
-
-    img {
-        width: 35px;
-        padding: .5rem;
-        border-radius: .5rem;
-    }
 
     h1 {
         margin: 0;
@@ -24,21 +19,33 @@ const CategoryContainer = styled.div`
 `
 
 const QuestionContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
     user-select: none;
-    font-size: 1.5rem;
-
-    h2 {
-        font-weight: 500;
-        margin: 0;
-    }
+    font-size: 2rem;
 `
+
+const QuestionCounter = styled.h2`
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 300;
+    opacity: .8;
+    font-style: italic;
+`
+
+const Question = styled.h3`
+    font-weight: 500;
+    margin: 0;
+`
+
 
 const AnswerContainer = styled.div`
     display: flex;
     align-items: center;
     gap: 1.5rem;
 
-    h3 {
+    h4 {
         font-size: 1.5rem;
         font-weight: 500;
         color: white;
@@ -74,7 +81,7 @@ const DelayedComponent = ({ children, loadAnimation }) => {
 
 const Category = (props) =>
     <CategoryContainer>
-        <img
+        <LanguageIcon
             src={props.imgSrc}
             style={{ backgroundColor: props.bgColor }}
         />
@@ -107,7 +114,11 @@ export const Quiz = (props) => {
             <Main>
                 <MessageBox>
                     <QuestionContainer>
-                        <h2>{questions[index].question}</h2>
+                        <QuestionCounter>
+                            Questão {index + 1} de {questions.length}
+                        </QuestionCounter>
+
+                        <Question>{questions[index].question}</Question>
                     </QuestionContainer>
                 </MessageBox>
 
@@ -116,7 +127,7 @@ export const Quiz = (props) => {
                         <OptionContainer>
                             <AnswerContainer>
                                 <span>{String.fromCharCode(65 + index)}</span>
-                                <h3>{option}</h3>
+                                <h4>{option}</h4>
                             </AnswerContainer>
                         </OptionContainer>
                     )}
