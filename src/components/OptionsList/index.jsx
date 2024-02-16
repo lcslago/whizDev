@@ -19,7 +19,8 @@ const Option = styled.li`
 
     button {
         width: 500px;
-        height: 80px;
+        height: 85px;
+        word-wrap: break-word;
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -41,11 +42,32 @@ const Option = styled.li`
     }   
 `
 
-export const LanguageIcon = styled.img`
-    width: 35px;
-    padding: .5rem;
-    border-radius: .5rem;
+const AnswerContainer = styled.div`
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 1.5rem;
+
+    h4 {
+        font-size: 1.5rem;
+        font-weight: 500;
+        width: 80%;
+        text-align: left;
+        color: white;
+        margin: 0;
+    }
+
+    span {
+        font-size: 32px;
+        background-color: #f5f6fa;
+        color: #3C4D67;
+        width: 35px;
+        height: 35px;
+        padding: .5rem;
+        border-radius: .5rem;
+    }
 `
+
 
 export const OptionsList = ({ children }) =>
     <OptionsListContainer>
@@ -60,4 +82,13 @@ export const OptionContainer = ({ children }) =>
             {children}
         </button>
     </Option>
+
+export const Answer = (props) =>
+    <AnswerContainer>
+        <span>
+            {props.alternative}
+        </span>
+
+        <h4>{props.title}</h4>
+    </AnswerContainer>
 
