@@ -20,6 +20,7 @@ const CategoryContainer = styled.div`
 
 const QuestionContainer = styled.div`
     display: flex;
+    height: 50vh;
     flex-direction: column;
     gap: 1.5rem;
     user-select: none;
@@ -39,6 +40,24 @@ const Question = styled.h3`
     margin: 0;
 `
 
+const ProgressBar = styled.label`
+    progress {
+        appearance: none;
+        width: 90%;
+        height: 13px;
+    }
+
+    progress::-webkit-progress-bar{
+        background-color: #3C4D67;
+        border-radius: 1rem;
+    }
+
+    progress::-webkit-progress-value {
+        background-color: #a629f6;
+        border: .2rem solid #3C4D67;
+        border-radius: 1rem;
+    } 
+`
 
 const AnswerContainer = styled.div`
     display: flex;
@@ -120,6 +139,7 @@ export const Quiz = (props) => {
 
                         <Question>{questions[index].question}</Question>
                     </QuestionContainer>
+                    <ProgressBar><progress max={questions.length} value={index + 1}></progress></ProgressBar>
                 </MessageBox>
 
                 <OptionsList>

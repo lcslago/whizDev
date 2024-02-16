@@ -19,7 +19,7 @@ const Option = styled.li`
 
     button {
         width: 500px;
-        height: 90px;
+        height: 80px;
         cursor: pointer;
         display: flex;
         align-items: center;
