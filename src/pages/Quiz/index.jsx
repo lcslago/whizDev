@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Category, Header, HeaderTitle } from "../../components/Header"
 import { Main } from "../../App"
 import { MessageBox } from "../../components/MessageBox"
-import { Answer, OptionContainer, OptionsList } from "../../components/OptionsList"
+import { Answer, OptionsList } from "../../components/OptionsList"
 import { Question, QuestionContainer, QuestionCounter } from "../../components/Question"
 import { ProgressBar } from "../../components/ProgressBar"
 
@@ -68,12 +68,11 @@ export const Quiz = (props) => {
 
                 <OptionsList>
                     {options.map((option, index) =>
-                        <OptionContainer>
-                            <Answer
-                                alternative={String.fromCharCode(65 + index)}
-                                title={option} />
-
-                        </OptionContainer>
+                        <Answer
+                            alternative={String.fromCharCode(65 + index)}
+                            title={option}
+                            id={option}
+                            key={option} />
                     )}
                 </OptionsList>
             </Main>
