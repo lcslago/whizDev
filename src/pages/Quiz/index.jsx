@@ -5,6 +5,7 @@ import { MessageBox } from "../../components/MessageBox"
 import { Answer, OptionsList } from "../../components/OptionsList"
 import { Question, QuestionContainer, QuestionCounter } from "../../components/Question"
 import { ProgressBar } from "../../components/ProgressBar"
+import { SubmitAnswerButton } from "../../components/Button"
 
 
 const DelayedComponent = ({ children, loadAnimation }) => {
@@ -66,15 +67,19 @@ export const Quiz = (props) => {
 
                 </MessageBox>
 
+
                 <OptionsList>
                     {options.map((option, index) =>
                         <Answer
                             alternative={String.fromCharCode(65 + index)}
                             title={option}
-                            id={option}
+                            id={`answer${index + 1}`}
                             key={option} />
                     )}
+
+                    <SubmitAnswerButton />
                 </OptionsList>
+
             </Main>
         </>
     )

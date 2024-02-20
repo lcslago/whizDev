@@ -1,3 +1,4 @@
+import { createContext, useContext, useState } from "react"
 import { Link } from "react-router-dom"
 import styled, { css } from "styled-components"
 
@@ -14,22 +15,26 @@ const OptionsListContainer = styled.section`
     }
 `
 
-const OptionStyles = css`
+const AnswerForm = styled.form`
+    height: auto;
+    align-items: end;
+`
+
+export const OptionStyles = css`
     width: 450px;
     height: 50px;
-    display: flex;
-    align-items: center;
-    word-wrap: break-word;
     cursor: pointer;
+    word-wrap: break-word;
     display: flex;
     align-items: center;
-    background-color: #3C4D67;
     font-weight: 500;
     font-size: 1.5rem;
     border: none;
     border-radius: 1.2rem;
     padding: 1rem;
     gap: 1.5rem;
+    background-color: #3C4D67;
+    color: white;
 `
 
 const AlternativeLetterStyles = css`
@@ -45,33 +50,27 @@ const OptionLinkStyled = styled(Link)`
     ${OptionStyles}
     border: .2rem solid #3C4D67;
     text-decoration: none;
-    color: white;
 `
 
 const AnswerContainer = styled.div`
     label {
         ${OptionStyles}
         border: .2rem solid #3C4D67;
-
         h4 {
             font-weight: 500;
             width: 80%;
             text-align: left;
-            color: white;
             margin: 0;
         }
-
         span {
             ${AlternativeLetterStyles}
             background-color: #f5f6fa;
             color: #3C4D67;
         }
-
         input {
             display: none;
         }
-    }
-    
+    }   
     label:has(input:checked) {
         border-color: #a629f6;
 
@@ -82,11 +81,24 @@ const AnswerContainer = styled.div`
     }    
 `
 
+export const InputContext = createContext()
+const InputContextProvider = ({ children }) => {
+    const [inputChecked, setInputCheck] = useState(false)
+
+    return (
+        <InputContext.Provider value={{ inputChecked, setInputCheck }}>
+            {children}
+        </InputContext.Provider>
+    )
+}
+
 export const OptionsList = ({ children }) =>
     <OptionsListContainer>
-        <form>
-            {children}
-        </form>
+        <InputContextProvider>
+            <AnswerForm>
+                {children}
+            </AnswerForm>
+        </InputContextProvider>
     </OptionsListContainer>
 
 
@@ -96,6 +108,12 @@ export const OptionLink = ({ children, to }) =>
     </OptionLinkStyled>
 
 export const Answer = (props) => {
+    const { inputChecked, setInputCheck } = useContext(InputContext)
+
+    const handleChange = () => {
+        setInputCheck(true)
+    }
+
     return (
         <AnswerContainer>
             <label htmlFor={props.id}>
@@ -107,8 +125,8 @@ export const Answer = (props) => {
                     required
                     type="radio"
                     id={props.id}
-                    value={props.id}
-                    name="answer" />
+                    name="answer"
+                    onChange={handleChange} />
             </label>
         </AnswerContainer >
     )
