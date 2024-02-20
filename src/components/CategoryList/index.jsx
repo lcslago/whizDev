@@ -4,7 +4,7 @@ import { OptionLink } from "../OptionsList"
 import { BarLoader } from "react-spinners"
 import styled from "styled-components"
 
-export const LanguageIcon = styled.img`
+const LanguageIcon = styled.img`
     width: 35px;
     padding: .5rem;
     border-radius: .5rem;

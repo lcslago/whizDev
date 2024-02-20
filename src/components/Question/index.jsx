@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 const QuestionContainerStyled = styled.div`
     display: flex;
-    height: 50vh;
+    height: auto;
     flex-direction: column;
     gap: 1.5rem;
     user-select: none;

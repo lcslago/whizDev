@@ -18,7 +18,7 @@ const Background = styled.div`
   background-repeat: no-repeat;
   background-size: 100vw;
   min-height: 100vh;
-  padding: 0 10rem;
+  padding: 0 10vw;
 `
 
 const App = () => {

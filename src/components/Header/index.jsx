@@ -1,11 +1,10 @@
 import styled from "styled-components"
-import { LanguageIcon } from "../CategoryList"
 
 const StyledHeader = styled.header`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 2rem 0 4rem 0;
+    padding: 1rem 0 2rem 0;
     width: auto;
     height: 10vh;
 `
@@ -21,15 +20,19 @@ const CategoryContainer = styled.div`
     display: flex;
     align-items: center;
     user-select: none;
-    gap: 1.5rem;
+    gap: 1rem;
 
     h1 {
         margin: 0;
         font-weight: 500;
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 `
-
+const LanguageIcon = styled.img`
+    width: 25px;
+    padding: .3rem;
+    border-radius: .5rem;
+`
 
 export const Header = ({ children }) =>
     <StyledHeader>

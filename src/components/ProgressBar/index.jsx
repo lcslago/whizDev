@@ -3,7 +3,7 @@ import styled from "styled-components";
 const ProgressBarStyled = styled.label`
     progress {
         appearance: none;
-        width: 100%;
+        width: 450px;
         height: 13px;
     }
 
