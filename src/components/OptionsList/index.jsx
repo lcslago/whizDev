@@ -23,7 +23,6 @@ const AnswerForm = styled.form`
 export const OptionStyles = css`
     width: 450px;
     height: 50px;
-    cursor: pointer;
     word-wrap: break-word;
     display: flex;
     align-items: center;
@@ -56,6 +55,9 @@ const AnswerContainer = styled.div`
     label {
         ${OptionStyles}
         border: .2rem solid #3C4D67;
+        user-select: none;
+        cursor: ${props => props.cursor};
+
         h4 {
             font-weight: 500;
             width: 80%;
@@ -72,21 +74,28 @@ const AnswerContainer = styled.div`
         }
     }   
     label:has(input:checked) {
-        border-color: #a629f6;
+        border-color: ${props => props.color};
 
         span {
-            background-color: #a629f6;
+            background-color: ${props => props.color};
             color: #f5f6fa;
         }
     }    
 `
 
+
 export const InputContext = createContext()
 const InputContextProvider = ({ children }) => {
     const [inputChecked, setInputCheck] = useState(false)
+    const [correctAnswer, setCorrectAnswer] = useState(null)
 
     return (
-        <InputContext.Provider value={{ inputChecked, setInputCheck }}>
+        <InputContext.Provider value={{
+            inputChecked,
+            setInputCheck,
+            correctAnswer,
+            setCorrectAnswer
+        }}>
             {children}
         </InputContext.Provider>
     )
@@ -108,25 +117,26 @@ export const OptionLink = ({ children, to }) =>
     </OptionLinkStyled>
 
 export const Answer = (props) => {
-    const { inputChecked, setInputCheck } = useContext(InputContext)
-
-    const handleChange = () => {
-        setInputCheck(true)
-    }
+    const { setInputCheck, correctAnswer } = useContext(InputContext)
+    const isAnswerRight = correctAnswer === true
+    const isAnswerWrong = correctAnswer === false
 
     return (
-        <AnswerContainer>
+        <AnswerContainer
+            color={isAnswerRight ? "green" : isAnswerWrong ? "red" : "#a629f6"}
+            cursor={correctAnswer !== null ? "default" : "pointer"}>
+
             <label htmlFor={props.id}>
                 <span>
                     {props.alternative}
                 </span>
                 <h4>{props.title}</h4>
                 <input
-                    required
                     type="radio"
                     id={props.id}
                     name="answer"
-                    onChange={handleChange} />
+                    disabled={correctAnswer !== null && true}
+                    onChange={() => setInputCheck(true)} />
             </label>
         </AnswerContainer >
     )

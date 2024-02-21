@@ -26,20 +26,19 @@ const SubmitButtonDeactivated = styled.input`
     cursor: not-allowed;
 `
 
-export const SubmitAnswerButton = () => {
+export const SubmitAnswerButton = (props) => {
+    const { inputChecked, setCorrectAnswer } = useContext(InputContext)
 
-    const { inputChecked, setInputCheck } = useContext(InputContext)
-
-    const handleSubmit = (e) => {
+    const handleSubmition = (e) => {
         e.preventDefault()
-        const form = e.target.form
-        const
-            inputsChecked = Array.from(form)
-                .map(input => input.checked)
-                .some((checked) => checked)
 
-        // !inputsChecked && setChecked(false)
-        inputsChecked && console.log("Uma resposta foi selecionada")
+        const correctAnswer = props.answer
+        const form = e.target.form
+        const answer = Array.from(form)
+            .map(input => input.checked && input.previousElementSibling.innerText)
+            .filter(word => word !== false).toString()
+
+        setCorrectAnswer(answer === correctAnswer)
     }
 
     return (
@@ -48,7 +47,7 @@ export const SubmitAnswerButton = () => {
                 <SubmitButtonDeactivated type="submit" value="Selecione uma alternativa"></SubmitButtonDeactivated>
             }
             {inputChecked &&
-                <SubmitButton type="submit" value="Enviar Resposta" onClick={handleSubmit}></SubmitButton>
+                <SubmitButton type="submit" value="Enviar Resposta" onClick={handleSubmition}></SubmitButton>
             }
         </>
     )

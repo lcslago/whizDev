@@ -34,6 +34,7 @@ export const Quiz = (props) => {
     const title = props.render.title
     const questions = props.render.questions
     const options = questions[index].options
+    const answer = questions[index].answer
 
     return (
         <>
@@ -77,7 +78,7 @@ export const Quiz = (props) => {
                             key={option} />
                     )}
 
-                    <SubmitAnswerButton />
+                    <SubmitAnswerButton answer={answer} />
                 </OptionsList>
 
             </Main>
