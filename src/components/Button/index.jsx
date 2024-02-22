@@ -1,8 +1,9 @@
 import { useContext } from "react"
 import styled, { css } from "styled-components"
 import { InputContext } from "../OptionsList"
+import { QuizContext } from "../../pages/Quiz"
 
-const ButtonStyles = css`
+const DefaultButtonStyles = css`
     width: 488px;
     height: 80px;
     background-color: #a629f6;
@@ -16,22 +17,22 @@ const ButtonStyles = css`
 `
 
 const SubmitButton = styled.input`
-    ${ButtonStyles}
-    cursor: pointer;
-`
-
-const SubmitButtonDeactivated = styled.input`
-    ${ButtonStyles}
-    opacity: .5;
-    cursor: not-allowed;
+    ${DefaultButtonStyles}
+    cursor: ${props => props.cursor};
+    opacity: ${props => props.opacity};
 `
 
 export const SubmitAnswerButton = (props) => {
-    const { inputChecked, setCorrectAnswer } = useContext(InputContext)
+    const {
+        inputChecked,
+        setInputChecked,
+        correctAnswer,
+        setCorrectAnswer } = useContext(InputContext)
 
-    const handleSubmition = (e) => {
+    let { index, setIndex } = useContext(QuizContext)
+
+    const checkAnswer = (e) => {
         e.preventDefault()
-
         const correctAnswer = props.answer
         const form = e.target.form
         const answer = Array.from(form)
@@ -41,14 +42,28 @@ export const SubmitAnswerButton = (props) => {
         setCorrectAnswer(answer === correctAnswer)
     }
 
+    const goToNextQuestion = (e) => {
+        e.preventDefault()
+        index += 1
+        setIndex(index)
+        setCorrectAnswer(null)
+        setInputChecked(false)
+    }
+
     return (
-        <>
-            {!inputChecked &&
-                <SubmitButtonDeactivated type="submit" value="Selecione uma alternativa"></SubmitButtonDeactivated>
-            }
-            {inputChecked &&
-                <SubmitButton type="submit" value="Enviar Resposta" onClick={handleSubmition}></SubmitButton>
-            }
-        </>
+        <SubmitButton
+            type="submit"
+            cursor={!inputChecked ? "not-allowed" : "pointer"}
+            opacity={!inputChecked ? ".5" : "1"}
+            disabled={!inputChecked ? true : false}
+            value={
+                !inputChecked ?
+                    "Selecione uma alternativa" :
+                    correctAnswer === null ?
+                        "Enviar Resposta" :
+                        "Próxima Questão"}
+
+            onClick={correctAnswer === null ? checkAnswer : goToNextQuestion}>
+        </SubmitButton>
     )
 }

@@ -86,13 +86,13 @@ const AnswerContainer = styled.div`
 
 export const InputContext = createContext()
 const InputContextProvider = ({ children }) => {
-    const [inputChecked, setInputCheck] = useState(false)
+    const [inputChecked, setInputChecked] = useState(false)
     const [correctAnswer, setCorrectAnswer] = useState(null)
 
     return (
         <InputContext.Provider value={{
             inputChecked,
-            setInputCheck,
+            setInputChecked,
             correctAnswer,
             setCorrectAnswer
         }}>
@@ -117,13 +117,13 @@ export const OptionLink = ({ children, to }) =>
     </OptionLinkStyled>
 
 export const Answer = (props) => {
-    const { setInputCheck, correctAnswer } = useContext(InputContext)
+    const { setInputChecked, correctAnswer } = useContext(InputContext)
     const isAnswerRight = correctAnswer === true
     const isAnswerWrong = correctAnswer === false
 
     return (
         <AnswerContainer
-            color={isAnswerRight ? "green" : isAnswerWrong ? "red" : "#a629f6"}
+            color={isAnswerRight ? "#26D782" : isAnswerWrong ? "#EE5454" : "#A729F5"}
             cursor={correctAnswer !== null ? "default" : "pointer"}>
 
             <label htmlFor={props.id}>
@@ -136,7 +136,7 @@ export const Answer = (props) => {
                     id={props.id}
                     name="answer"
                     disabled={correctAnswer !== null && true}
-                    onChange={() => setInputCheck(true)} />
+                    onChange={() => setInputChecked(true)} />
             </label>
         </AnswerContainer >
     )

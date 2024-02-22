@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { createContext, useState } from "react"
 import { Category, Header, HeaderTitle } from "../../components/Header"
 import { Main } from "../../App"
 import { MessageBox } from "../../components/MessageBox"
@@ -24,10 +24,10 @@ const DelayedComponent = ({ children, loadAnimation }) => {
     )
 }
 
-
+export const QuizContext = createContext()
 
 export const Quiz = (props) => {
-    let index = 0
+    const [index, setIndex] = useState(0)
 
     const icon = props.render.icon
     const bgColor = props.render['icon-bg-color']
@@ -78,7 +78,9 @@ export const Quiz = (props) => {
                             key={option} />
                     )}
 
-                    <SubmitAnswerButton answer={answer} />
+                    <QuizContext.Provider value={{ index, setIndex }}>
+                        <SubmitAnswerButton answer={answer} />
+                    </QuizContext.Provider>
                 </OptionsList>
 
             </Main>
