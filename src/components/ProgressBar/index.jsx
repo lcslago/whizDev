@@ -13,7 +13,7 @@ const ProgressBarStyled = styled.label`
     }
 
     progress::-webkit-progress-value {
-        background-color: #a629f6;
+        background-color: #A729F5;
         border: .2rem solid #3C4D67;
         border-radius: 1rem;
     } 
