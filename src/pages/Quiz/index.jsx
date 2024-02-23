@@ -1,4 +1,4 @@
-import { createContext, useState } from "react"
+import { createContext, useEffect, useState } from "react"
 import { Category, Header, HeaderTitle } from "../../components/Header"
 import { Main } from "../../App"
 import { MessageBox } from "../../components/MessageBox"
@@ -11,8 +11,8 @@ import { SubmitAnswerButton } from "../../components/Button"
 const DelayedComponent = ({ children, loadAnimation }) => {
     const [timesUp, setTimer] = useState(false)
 
-    useState(() => {
-        const timeout = setTimeout(() => { setTimer(true) }, 1500)
+    useEffect(() => {
+        const timeout = setTimeout(() => { setTimer(true) }, 100)
         return () => clearTimeout(timeout)
     }, [])
 
@@ -51,38 +51,42 @@ export const Quiz = (props) => {
             </Header>
 
             <Main>
-                <MessageBox>
-                    <QuestionContainer>
-                        <QuestionCounter>
-                            Questão {index + 1} de {questions.length}
-                        </QuestionCounter>
+                <DelayedComponent>
+                    <MessageBox>
+                        <QuestionContainer>
+                            <QuestionCounter>
+                                Questão {index + 1} de {questions.length}
+                            </QuestionCounter>
 
-                        <Question>
-                            {questions[index].question}
-                        </Question>
-                    </QuestionContainer>
+                            <Question>
+                                {questions[index].question}
+                            </Question>
+                        </QuestionContainer>
 
-                    <ProgressBar
-                        max={questions.length}
-                        value={index + 1} />
+                        <ProgressBar
+                            max={questions.length}
+                            value={index + 1} />
 
-                </MessageBox>
+                    </MessageBox>
 
 
-                <OptionsList>
-                    {options.map((option, index) =>
-                        <Answer
-                            alternative={String.fromCharCode(65 + index)}
-                            title={option}
-                            id={`answer${index + 1}`}
-                            key={option} />
-                    )}
+                    <OptionsList>
+                        {options.map((option, index) =>
+                            <Answer
+                                alternative={String.fromCharCode(65 + index)}
+                                title={option}
+                                id={`answer${index + 1}`}
+                                key={option} />
+                        )}
 
-                    <QuizContext.Provider value={{ index, setIndex }}>
-                        <SubmitAnswerButton answer={answer} />
-                    </QuizContext.Provider>
-                </OptionsList>
+                        <QuizContext.Provider value={{ index, setIndex }}>
+                            <SubmitAnswerButton
+                                answer={answer}
+                                endOfQuiz={questions.length} />
 
+                        </QuizContext.Provider>
+                    </OptionsList>
+                </DelayedComponent>
             </Main>
         </>
     )

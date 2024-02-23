@@ -2,6 +2,7 @@ import { useContext } from "react"
 import styled, { css } from "styled-components"
 import { InputContext } from "../OptionsList"
 import { QuizContext } from "../../pages/Quiz"
+import { useNavigate } from "react-router-dom"
 
 const DefaultButtonStyles = css`
     width: 488px;
@@ -30,6 +31,7 @@ export const SubmitAnswerButton = (props) => {
         setCorrectAnswer } = useContext(InputContext)
 
     let { index, setIndex } = useContext(QuizContext)
+    const navigate = useNavigate()
 
     const checkAnswer = (e) => {
         e.preventDefault()
@@ -50,6 +52,11 @@ export const SubmitAnswerButton = (props) => {
         setInputChecked(false)
     }
 
+    const goToFinalScore = (e) => {
+        e.preventDefault()
+        navigate("/")
+    }
+
     return (
         <SubmitButton
             type="submit"
@@ -61,9 +68,16 @@ export const SubmitAnswerButton = (props) => {
                     "Selecione uma alternativa" :
                     correctAnswer === null ?
                         "Enviar Resposta" :
-                        "Próxima Questão"}
+                        index === props.endOfQuiz - 1 ?
+                            "Finalizar Quiz" :
+                            "Próxima Questão"}
 
-            onClick={correctAnswer === null ? checkAnswer : goToNextQuestion}>
+            onClick={
+                correctAnswer === null ?
+                    checkAnswer :
+                    index === props.endOfQuiz - 1 ?
+                        goToFinalScore :
+                        goToNextQuestion}>
         </SubmitButton>
     )
 }
