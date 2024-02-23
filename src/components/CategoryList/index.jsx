@@ -21,9 +21,12 @@ export const CategoryList = () => {
 
                     <OptionLink>
                         <BarLoader
-                            color="#f5f6fa"
+                            color="#F4F6FA"
+                            cssOverride={{
+                                'border-radius': '.2rem'
+                            }}
                             width={"100%"}
-                            height={6} />
+                            height={8} />
                     </OptionLink>)}
 
             {!loading &&
