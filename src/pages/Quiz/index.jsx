@@ -8,7 +8,7 @@ import { ProgressBar } from "../../components/ProgressBar"
 import { SubmitAnswerButton } from "../../components/Button"
 
 
-const DelayedComponent = ({ children, loadAnimation }) => {
+export const DelayedComponent = ({ children, loadAnimation }) => {
     const [timesUp, setTimer] = useState(false)
 
     useEffect(() => {
@@ -82,7 +82,8 @@ export const Quiz = (props) => {
                         <QuizContext.Provider value={{ index, setIndex }}>
                             <SubmitAnswerButton
                                 answer={answer}
-                                endOfQuiz={questions.length} />
+                                endOfQuiz={questions.length}
+                                title={title} />
 
                         </QuizContext.Provider>
                     </OptionsList>

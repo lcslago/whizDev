@@ -54,7 +54,7 @@ export const SubmitAnswerButton = (props) => {
 
     const goToFinalScore = (e) => {
         e.preventDefault()
-        navigate("/")
+        navigate(`./resultado`)
     }
 
     return (
