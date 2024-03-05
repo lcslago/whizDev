@@ -30,7 +30,7 @@ export const SubmitAnswerButton = (props) => {
         correctAnswer,
         setCorrectAnswer } = useContext(InputContext)
 
-    let { index, setIndex } = useContext(QuizContext)
+    const { index, setIndex } = useContext(QuizContext)
     const navigate = useNavigate()
 
     const checkAnswer = (e) => {
@@ -46,15 +46,14 @@ export const SubmitAnswerButton = (props) => {
 
     const goToNextQuestion = (e) => {
         e.preventDefault()
-        index += 1
-        setIndex(index)
+        setIndex(prevIndex => prevIndex + 1)
         setCorrectAnswer(null)
         setInputChecked(false)
     }
 
-    const goToFinalScore = (e) => {
+    const goTo = (page, e) => {
         e.preventDefault()
-        navigate(`./resultado`)
+        navigate(page)
     }
 
     return (
@@ -63,21 +62,15 @@ export const SubmitAnswerButton = (props) => {
             cursor={!inputChecked ? "not-allowed" : "pointer"}
             opacity={!inputChecked ? ".5" : "1"}
             disabled={!inputChecked ? true : false}
+
             value={
-                !inputChecked ?
-                    "Selecione uma alternativa" :
-                    correctAnswer === null ?
-                        "Enviar Resposta" :
-                        index === props.endOfQuiz - 1 ?
-                            "Finalizar Quiz" :
-                            "Próxima Questão"}
+                !inputChecked ? "Selecione uma alternativa" :
+                    correctAnswer === null ? "Enviar Resposta" :
+                        index === props.endOfQuiz - 1 ? "Finalizar Quiz" : "Próxima Questão"}
 
             onClick={
-                correctAnswer === null ?
-                    checkAnswer :
-                    index === props.endOfQuiz - 1 ?
-                        goToFinalScore :
-                        goToNextQuestion}>
+                correctAnswer === null ? checkAnswer :
+                    index === props.endOfQuiz - 1 ? (e) => goTo("./resultado", e) : goToNextQuestion}>
         </SubmitButton>
     )
 }
