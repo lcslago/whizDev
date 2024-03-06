@@ -3,7 +3,7 @@ import { Category, Header, HeaderTitle } from "../../components/Header"
 import { Message } from "../../components/Message"
 import { MessageBox } from "../../components/MessageBox"
 import { ScoreFrame } from "../../components/ScoreFrame"
-import { DelayedComponent } from "../Quiz"
+import { DelayedComponent } from "../../containers/DelayedComponent"
 
 export const Score = (props) => {
     const icon = props.render.icon

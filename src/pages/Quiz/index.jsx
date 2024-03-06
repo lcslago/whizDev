@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react"
+import { createContext, useState } from "react"
 import { Category, Header, HeaderTitle } from "../../components/Header"
 import { Main } from "../../App"
 import { MessageBox } from "../../components/MessageBox"
@@ -6,23 +6,8 @@ import { Answer, OptionsList } from "../../components/OptionsList"
 import { Question, QuestionContainer, QuestionCounter } from "../../components/Question"
 import { ProgressBar } from "../../components/ProgressBar"
 import { SubmitAnswerButton } from "../../components/Button"
+import { DelayedComponent } from "../../containers/DelayedComponent"
 
-
-export const DelayedComponent = ({ children, loadAnimation }) => {
-    const [timesUp, setTimer] = useState(false)
-
-    useEffect(() => {
-        const timeout = setTimeout(() => { setTimer(true) }, 100)
-        return () => clearTimeout(timeout)
-    }, [])
-
-    return (
-        <>
-            {!timesUp && <>{loadAnimation}</>}
-            {timesUp && <> {children} </>}
-        </>
-    )
-}
 
 export const QuizContext = createContext()
 
