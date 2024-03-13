@@ -26,7 +26,7 @@ export const AppRoutes = () => {
 
                     <Route
                         path={`/${category.title.toLowerCase()}/resultado`}
-                        element={<Score render={category} />} />
+                        element={<Score render={category} questionsLength={category.questions.length} />} />
                 </>
             )}
 

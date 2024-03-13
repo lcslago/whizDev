@@ -10,6 +10,8 @@ export const Score = (props) => {
     const bgColor = props.render['icon-bg-color']
     const title = props.render.title
 
+    const questionsLength = props.questionsLength
+
     return (
         <>
             <Header>
@@ -35,7 +37,7 @@ export const Score = (props) => {
                     </MessageBox>
 
                     <MessageBox>
-                        <ScoreFrame />
+                        <ScoreFrame numberOfQuestions={questionsLength} />
                     </MessageBox>
                 </DelayedComponent>
             </Main>

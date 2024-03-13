@@ -3,6 +3,7 @@ import styled, { css } from "styled-components"
 import { InputContext } from "../OptionsList"
 import { QuizContext } from "../../pages/Quiz"
 import { useNavigate } from "react-router-dom"
+import { ScoreContext } from "../../context/ScoreContext"
 
 const DefaultButtonStyles = css`
     width: 488px;
@@ -31,17 +32,24 @@ export const SubmitAnswerButton = (props) => {
         setCorrectAnswer } = useContext(InputContext)
 
     const { index, setIndex } = useContext(QuizContext)
+    const { setScore } = useContext(ScoreContext)
     const navigate = useNavigate()
 
     const checkAnswer = (e) => {
         e.preventDefault()
-        const correctAnswer = props.answer
+        const answerFromDB = props.answer
         const form = e.target.form
-        const answer = Array.from(form)
+        const answerSubmited = Array.from(form)
             .map(input => input.checked && input.previousElementSibling.innerText)
             .filter(word => word !== false).toString()
 
-        setCorrectAnswer(answer === correctAnswer)
+        const answerIsCorrect = answerSubmited === answerFromDB
+        setCorrectAnswer(answerIsCorrect)
+
+        if (answerIsCorrect) {
+            setScore(prevScore => prevScore + 1)
+        }
+
     }
 
     const goToNextQuestion = (e) => {

@@ -3,6 +3,7 @@ import GlobalStyle from "./components/GlobalStyles"
 import { BrowserRouter } from "react-router-dom"
 import { DatabaseProvider } from "./context/ApiContext"
 import { AppRoutes } from "./Routes"
+import { ScoreProvider } from "./context/ScoreContext"
 
 export const Main = styled.main`
   display: flex;
@@ -27,7 +28,9 @@ const App = () => {
       <Background>
         <GlobalStyle />
         <DatabaseProvider>
-          <AppRoutes />
+          <ScoreProvider>
+            <AppRoutes />
+          </ScoreProvider>
         </DatabaseProvider>
       </Background >
     </BrowserRouter >

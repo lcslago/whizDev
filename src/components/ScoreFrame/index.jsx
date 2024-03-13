@@ -1,6 +1,8 @@
+import { useContext } from "react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import 'react-circular-progressbar/dist/styles.css';
 import styled from "styled-components";
+import { ScoreContext } from "../../context/ScoreContext";
 
 const ScoreContainer = styled.div`
     display: flex;
@@ -8,7 +10,7 @@ const ScoreContainer = styled.div`
     justify-content: center;
     align-items: center;
     padding: 2.5rem 0;
-    gap: 1.5rem;
+    gap: 2rem;
     background-color: #3C4D67;
     width: 100%;
     height: auto;
@@ -28,19 +30,22 @@ const ScoreNumbers = styled.div`
     p {
         font-size: 1rem;
         margin: 0;
-        opacity: .6;
+        opacity: .7;
     }
 `
 
-export const ScoreFrame = () => {
+export const ScoreFrame = (props) => {
+    const { score } = useContext(ScoreContext)
+    const numberOfQuestions = props.numberOfQuestions
 
+    const percentageScore = Math.round((score / numberOfQuestions) * 100)
 
     return (
         <ScoreContainer>
             <CircularProgressbarContainer>
                 <CircularProgressbar
-                    value={80}
-                    text="80%"
+                    value={percentageScore}
+                    text={`${percentageScore}%`}
                     strokeWidth={6}
 
                     styles={{
@@ -50,7 +55,7 @@ export const ScoreFrame = () => {
             </CircularProgressbarContainer>
 
             <ScoreNumbers>
-                <p>8 questões de 10</p>
+                <p>{score} questões de {numberOfQuestions}</p>
             </ScoreNumbers>
         </ScoreContainer>
     )
