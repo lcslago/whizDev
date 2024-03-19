@@ -46,6 +46,14 @@ export const ScoreFrame = (props) => {
         return () => clearTimeout(timeout)
     }, [])
 
+    const scoreColor = () =>
+        percentageScore >= 70 ? '#26D782' :
+            (percentageScore >= 50 && percentageScore <= 69) ?
+                '#F4D03F' :
+                '#EE5454'
+
+
+
     return (
         <ScoreContainer>
             <CircularProgressbarContainer>
@@ -56,8 +64,8 @@ export const ScoreFrame = (props) => {
 
                     styles={{
                         trail: { stroke: '#313E51' },
-                        text: { fontSize: '1.8rem' },
-                        // path: { stroke: '#F4D03F' }
+                        text: { fontSize: '1.8rem', fill: `${scoreColor()}` },
+                        path: { stroke: `${scoreColor()}` }
                     }} />
             </CircularProgressbarContainer>
 
