@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import 'react-circular-progressbar/dist/styles.css';
 import styled from "styled-components";
@@ -36,9 +36,15 @@ const ScoreNumbers = styled.div`
 
 export const ScoreFrame = (props) => {
     const { score } = useContext(ScoreContext)
-    const numberOfQuestions = props.numberOfQuestions
+    const [percentageScore, setScore] = useState(0)
 
-    const percentageScore = Math.round((score / numberOfQuestions) * 100)
+    const numberOfQuestions = props.numberOfQuestions
+    const percentageScoreEquation = Math.round((score / numberOfQuestions) * 100)
+
+    useEffect(() => {
+        const timeout = setTimeout(() => { setScore(percentageScoreEquation) }, 150)
+        return () => clearTimeout(timeout)
+    }, [])
 
     return (
         <ScoreContainer>
@@ -50,7 +56,8 @@ export const ScoreFrame = (props) => {
 
                     styles={{
                         trail: { stroke: '#313E51' },
-                        text: { fontSize: '1.8rem' }
+                        text: { fontSize: '1.8rem' },
+                        // path: { stroke: '#F4D03F' }
                     }} />
             </CircularProgressbarContainer>
 
